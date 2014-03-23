@@ -1,0 +1,76 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background"
+    android:orientation="vertical"
+    tools:context=".MainActivity" >
+
+    <ListView
+        android:id="@+id/mensajes_mensajes"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1.0"
+        android:dividerHeight="0dp"
+		android:divider="@null"
+		android:stackFromBottom="true"
+android:transcriptMode="normal"
+        tools:listitem="@android:layout/simple_list_item_1" >
+
+    </ListView>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+            <requestFocus />
+
+            <ImageView
+                android:id="@+id/imageView1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="fitXY"
+                android:src="@drawable/gray" />
+            
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom"
+                    android:layout_margin="4dp"
+                    android:gravity="bottom"
+                    android:minHeight="50dp" >
+
+<EditText
+    android:id="@+id/mensajes_input"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="bottom"
+    android:layout_weight="1"
+    android:capitalize="sentences"
+    android:ems="10"
+    android:hint="Mensaje"
+    android:maxLines="2"
+    android:scrollbars="vertical"
+    android:text="" >
+
+    
+
+</EditText>
+
+<Button
+    android:id="@+id/button1"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:onClick="sendMessage"
+    
+    android:text="Enviar" >
+
+</Button>
+
+        </LinearLayout>
+        </FrameLayout>
+
+        
+
+    
+
+</LinearLayout>
