@@ -26,7 +26,8 @@
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme" >
+        android:theme="@style/AppTheme" 
+        android:name="mx.kennyeni.immockup.Aplicacion">
         <activity
             android:name="mx.kennyeni.immockup.MainActivity"
             android:label="@string/app_name" android:screenOrientation="portrait">
@@ -59,6 +60,7 @@
             </intent-filter>
         </receiver>
         
+        <!--  
         <receiver
             android:name="mx.kennyeni.immockup.IntentReceiver"
             android:exported="false" >
@@ -66,6 +68,7 @@
                 <action android:name="mx.kennyeni.immockup.UPDATE_STATUS" />
             </intent-filter>
         </receiver>
+        -->
         
         <receiver
             android:name="com.parse.GcmBroadcastReceiver"
