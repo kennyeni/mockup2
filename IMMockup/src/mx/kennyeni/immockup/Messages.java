@@ -55,6 +55,10 @@ public class Messages extends Activity {
 				String emisor = (String) json.get("Emisor");
 				if(emisor.equals(usuarioContraparte)){
 					adaptador.loadObjects();
+					HashMap<String, String> values = new HashMap<String, String>();
+					values.put("De", usuarioContraparte);
+					values.put("Para", currentUser.getUsername());
+					ParseCloud.callFunctionInBackground("marcarLeido", values, leido);
 				}
 			} catch (JSONException e) {
 				 Log.d("IMMockup", "JSONException: " + e.getMessage());
