@@ -4,11 +4,17 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import android.os.Bundle;
 import android.app.Activity;
 import android.app.DialogFragment;
 import android.app.ListActivity;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
@@ -41,6 +47,21 @@ public class Messages extends Activity {
 	MessageParseQueryAdapter<ParseObject> adaptador;
 	private ListView lst;
 	
+	private BroadcastReceiver receiver = new BroadcastReceiver() {
+		@Override
+        public void onReceive(Context context, Intent intent) {
+			try {
+				JSONObject json = new JSONObject(intent.getExtras().getString("com.parse.Data"));
+				String emisor = (String) json.get("Emisor");
+				if(emisor.equals(usuarioContraparte)){
+					adaptador.loadObjects();
+				}
+			} catch (JSONException e) {
+				 Log.d("IMMockup", "JSONException: " + e.getMessage());
+			}
+        }
+	};
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -70,6 +91,18 @@ public class Messages extends Activity {
 		values.put("Para", currentUser.getUsername());
 		ParseCloud.callFunctionInBackground("marcarLeido", values, leido);
 	}
+	
+	protected void onResume() {
+		super.onResume();
+		IntentFilter filter = new IntentFilter();
+        filter.addAction("mx.kennyeni.immockup.UPDATE_STATUS");
+        this.registerReceiver(this.receiver, filter);
+	};
+	
+	public void onPause() {
+        super.onPause();
+        this.unregisterReceiver(this.receiver);
+    }
 	
 	FunctionCallback<Object> leido = new FunctionCallback<Object>() {
 
